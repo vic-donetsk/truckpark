@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 
-class AdminSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,17 @@ class AdminSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Admin',
+            'name' => 'Manager',
             'email' => 'a@a.a',
             'password' => Hash::make('aaaaaaaa'),
+            'role_id' => 1
+        ]);
+
+        User::create([
+            'name' => 'Driver',
+            'email' => 'b@b.b',
+            'password' => Hash::make('bbbbbbbb'),
+            'role_id' => 2
         ]);
     }
 }

@@ -24,7 +24,17 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        $this->registerParkPolicies();
+    }
 
-        //
+    public function registerParkPolicies()
+    {
+        Gate::define('all-parks', function ($user) {
+            return $user->hasAccess(['all-parks']);
+        });
+        Gate::define('only-own-trucks', function ($user) {
+            return $user->hasAccess(['only-own-trucks']);
+        });
+
     }
 }
