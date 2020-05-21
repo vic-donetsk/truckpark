@@ -17,7 +17,6 @@ class RolesTableSeeder extends Seeder
             'slug' => 'manager',
             'permissions' => [
                 'all-parks' => true,
-
             ]
         ]);
         $driver = Role::create([

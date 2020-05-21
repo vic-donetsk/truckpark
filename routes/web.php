@@ -19,4 +19,3 @@ Auth::routes();
 
 Route::get('/', 'ParkController@index')->name('index')->middleware('auth');
 
-Route::get('/home', 'HomeController@index')->name('home');
