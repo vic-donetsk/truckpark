@@ -1,1 +1,5 @@
-test driver page - 2
+@extends('layouts.app')
+
+@section('content')
+    Это справочник водителя
+@endsection

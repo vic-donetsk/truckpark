@@ -3,11 +3,11 @@
 @section('content')
 
     @can('all-parks')
-        @include('manager.manager')
+        @include('nav.nav', ['route' => 'park_show', 'message' => 'Начать работу с автопарками'])
     @endcan
 
     @can('only-own-trucks')
-        @include('driver.driver')
+        @include('nav.nav', ['route' => 'truck_show', 'message' => 'Посмотреть свои машины'])
     @endcan
 
 @endsection

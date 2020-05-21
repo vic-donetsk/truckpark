@@ -10,4 +10,8 @@ class ParkController extends Controller
     public function index() {
         return view('main');
     }
+
+    public function show() {
+        return view('manager.manager');
+    }
 }
