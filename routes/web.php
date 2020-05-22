@@ -21,4 +21,6 @@ Route::get('/', 'ParkController@index')->name('index')->middleware('auth');
 
 Route::get('/parks', 'ParkController@show')->name('park_show')->middleware('can:all-parks');
 
+Route::delete('park_delete', 'ParkController@delete')->name('park_delete')->middleware('can:all-parks');
+
 Route::get('/trucks', 'TruckController@show')->name('truck_show')->middleware('can:only-own-trucks');
