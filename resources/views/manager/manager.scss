@@ -1,35 +1,22 @@
 .parks {
+
+    flex:     1;
     position: relative;
 
     table {
-        margin: 50px auto;
+        margin:          50px auto;
 
         border-collapse: collapse;
-        border: 2px solid #000;
+        border:          2px solid #000;
+
         th, td {
             padding: 5px 10px;
-            border: 2px solid #000;
+            border:  2px solid #000;
         }
+
         th {
             text-align: center;
         }
     }
 
-    &_modal {
-        display: none;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,.5);
-
-        z-index: 2;
-
-        .parkEdit {
-            background: #fff;
-        }
-
-    }
 }

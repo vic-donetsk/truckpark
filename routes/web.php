@@ -21,6 +21,8 @@ Route::get('/', 'ParkController@index')->name('index')->middleware('auth');
 
 Route::get('/parks', 'ParkController@show')->name('park_show')->middleware('can:all-parks');
 
+Route::get('/park_edit/{id?}', 'ParkController@edit')->name('park_edit')->middleware('can:all-parks');
+
 Route::post('/park_update', 'ParkController@update')->name('park_update')->middleware('can:all-parks');
 
 Route::delete('/park_delete', 'ParkController@delete')->name('park_delete')->middleware('can:all-parks');

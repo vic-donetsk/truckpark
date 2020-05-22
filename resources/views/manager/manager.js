@@ -6,31 +6,31 @@ $('.mod_delete').click(function(e) {
 });
 
 // редактирование существующего парка
-$('.parks_item-value.mod_edit').click(function(e) {
-    parkHandler(this);
-});
+// $('.parks_item-value.mod_edit').click(function(e) {
+//     parkHandler(this);
+// });
 
-$('.park_create').click(function(e) {
-    parkHandler();
-});
-
-// работа с формой для заполнения данных парка
-function parkHandler(elem = null) {
-    let inputs = ['name', 'address', 'work_schedule', 'id'];
-    // если редактируем существующий парк
-    if (elem) {
-        let parkData = $(elem).parent().data('park');
-        for (let oneInput of inputs) {
-            $('#parkEdit_' + oneInput).val(parkData[oneInput]);
-        }
-    } else {
-        for (let oneInput of inputs) {
-            $('#parkEdit_' + oneInput).val('');
-        }
-    }
-    $('.parks_modal').css('display', 'block');
-
-    $(".parkEdit_buttons-item.mod_close").click(function() {
-        $('.parks_modal').css('display', 'none');
-    });
-}
+// $('.park_create').click(function(e) {
+//     parkHandler();
+// });
+//
+// // работа с формой для заполнения данных парка
+// function parkHandler(elem = null) {
+//     let inputs = ['name', 'address', 'work_schedule', 'id'];
+//     // если редактируем существующий парк
+//     if (elem) {
+//         let parkData = $(elem).parent().data('park');
+//         for (let oneInput of inputs) {
+//             $('#parkEdit_' + oneInput).val(parkData[oneInput]);
+//         }
+//     } else {
+//         for (let oneInput of inputs) {
+//             $('#parkEdit_' + oneInput).val('');
+//         }
+//     }
+//     $('.parks_modal').css('display', 'block');
+//
+//     $(".parkEdit_buttons-item.mod_close").click(function() {
+//         $('.parks_modal').css('display', 'none');
+//     });
+// }

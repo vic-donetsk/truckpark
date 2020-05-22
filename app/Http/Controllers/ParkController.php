@@ -29,15 +29,29 @@ class ParkController extends Controller
 
         return view('manager.manager', [
             'parks' => $allParks,
-            'trucks' => $allTrucks,
             'headers' => ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы']
         ]);
     }
 
     /*
+     *  вывод формы создания/редактирования парка
+     */
+    public function edit(Request $request, int $id = null)
+    {
+        $park = ($id) ? Park::with('trucks')->find($id) : null;
+
+        return view('park_edit.park_edit', [
+            'park' => $park,
+            'headers' => ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы']
+        ]);
+    }
+
+
+    /*
      *  создает новый или обновляет существующий парк
      */
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
 
         $validatedData = $request->validate([
             'name' => 'required|min:2',

@@ -10990,6 +10990,7 @@ body * {
 }
 
 .parks {
+  flex: 1;
   position: relative;
 }
 
@@ -11007,20 +11008,5 @@ body * {
 
 .parks table th {
   text-align: center;
-}
-
-.parks_modal {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
-.parks_modal .parkEdit {
-  background: #fff;
 }
 
