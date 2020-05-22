@@ -10933,3 +10933,52 @@ a.text-dark:focus {
   }
 }
 
+.mainPage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url("/images/nav_background.jpeg");
+  background-size: cover;
+  padding: 50px;
+}
+
+.mainPage_nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.mainPage_nav-item {
+  padding: 10px 20px;
+  margin: 20px;
+  border: 3px solid #5f0000;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px rgba(95, 0, 0, 0.5);
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: antiquewhite;
+  transition: 0.3s ease;
+}
+
+.mainPage_nav-item.mod_enter {
+  background: #00c000;
+}
+
+.mainPage_nav-item.mod_exit {
+  background: red;
+}
+
+.mainPage_nav-item:hover {
+  transform: translate(5px, 5px);
+  color: gold;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.mainPage footer {
+  display: flex;
+}
+

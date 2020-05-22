@@ -18,6 +18,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: -webkit-fill-available;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -63,7 +75,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>
