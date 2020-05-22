@@ -8,4 +8,12 @@
 @import '~bootstrap/scss/bootstrap';
 
 // Project styles
+
+body, body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @import '../views/nav/nav';
+@import '../views/manager/manager';

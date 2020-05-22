@@ -14,6 +14,7 @@ class ParkTableSeeder extends Seeder
     {
         $word = ' автопарк';
         $parks = [
+            ['name' =>'Нулевой', 'address' => 'Николая II, 0', 'work_schedule' => 'как царь-батюшка прикажет'],
             ['name' =>'Первый', 'address' => 'Ленина, 1', 'work_schedule' => 'с утра до вечера'],
             ['name' =>'Второй', 'address' => 'Сталина, 2', 'work_schedule' => 'по настроению'],
             ['name' =>'Третий', 'address' => 'Хрущёва, 3', 'work_schedule' => 'весело, задорно и с энтузиазмом'],
@@ -23,7 +24,10 @@ class ParkTableSeeder extends Seeder
             ['name' =>'Седьмой', 'address' => 'Горбачева, 7', 'work_schedule' => 'только в ночную смену'],
             ['name' =>'Восьмой', 'address' => 'Кравчука, 8', 'work_schedule' => 'до последнего клиента'],
             ['name' =>'Девятый', 'address' => 'Кучмы, 9', 'work_schedule' => ''],
-            ['name' =>'Десятый', 'address' => 'Ющенко, 10', 'work_schedule' => ''],
+            ['name' =>'Десятый', 'address' => 'Ющенко, 10', 'work_schedule' => 'как пчелки. Но безрезультатно'],
+            ['name' =>'11-й', 'address' => 'Януковича, 11', 'work_schedule' => 'с 8 до 17, сб,вс - выходные'],
+            ['name' =>'12-й', 'address' => 'Порошенко, 12', 'work_schedule' => 'по выходным, пн-пт - отдыхаем'],
+            ['name' =>'13-й', 'address' => 'Зеленского, 13', 'work_schedule' => 'изредка, и вообще непонятно, зачем работаем'],
         ];
 
         foreach ($parks as $park) {

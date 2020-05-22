@@ -37320,16 +37320,71 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+// обработка удаления парка
 $('.mod_delete').click(function (e) {
-  console.log($(this).parent().data('id'));
   axios["delete"]('/park_delete', {
     params: {
-      id: $(this).parent().data('id')
+      id: $(this).parent().data('park').id
     }
   }).then(function (response) {
     return window.location.reload();
   });
+}); // редактирование существующего парка
+
+$('.parks_item-value.mod_edit').click(function (e) {
+  parkHandler(this);
 });
+$('.park_create').click(function (e) {
+  parkHandler();
+}); // работа с формой для заполнения данных парка
+
+function parkHandler() {
+  var elem = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var inputs = ['name', 'address', 'work_schedule', 'id']; // если редактируем существующий парк
+
+  if (elem) {
+    var parkData = $(elem).parent().data('park');
+
+    var _iterator = _createForOfIteratorHelper(inputs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var oneInput = _step.value;
+        $('#parkEdit_' + oneInput).val(parkData[oneInput]);
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  } else {
+    var _iterator2 = _createForOfIteratorHelper(inputs),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var _oneInput = _step2.value;
+        $('#parkEdit_' + _oneInput).val('');
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+
+  $('.parks_modal').css('display', 'block');
+  $(".parkEdit_buttons-item.mod_close").click(function () {
+    $('.parks_modal').css('display', 'none');
+  });
+}
 
 /***/ }),
 

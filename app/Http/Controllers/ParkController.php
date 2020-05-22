@@ -12,29 +12,53 @@ class ParkController extends Controller
     /*
      *  вывод страницы главного меню приложения
      */
-    public function index() {
+    public function index()
+    {
         return view('main');
     }
 
     /*
      *  вывод страницы справочника автопарков
      */
-    public function show() {
+    public function show()
+    {
 
         $allParks = Park::with('trucks')->get();
 
         $allTrucks = Truck::all();
 
-        return view('manager.manager', ['parks' => $allParks, 'trucks' => $allTrucks]);
+        return view('manager.manager', [
+            'parks' => $allParks,
+            'trucks' => $allTrucks,
+            'headers' => ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы']
+        ]);
     }
 
-    public function delete(Request $request) {
+    /*
+     *  создает новый или обновляет существующий парк
+     */
+    public function update(Request $request) {
+
+        $validatedData = $request->validate([
+            'name' => 'required|min:2',
+            'address' => 'required|min:10',
+        ]);
+
+
+        return redirect(route('park_show'));
+    }
+
+
+    /*
+     *  удаление парка из БД
+     */
+    public function delete(Request $request)
+    {
         try {
             $park = Park::find($request->id);
             $park->trucks()->detach();
             $park->delete();
-        }
-        catch(\Throwable $e) {
+        } catch (\Throwable $e) {
         }
 
     }
