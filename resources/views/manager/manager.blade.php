@@ -12,7 +12,7 @@
                 <th></th>
             </tr>
             @foreach ($parks as $park)
-                <tr class="parks_item">
+                <tr class="parks_item" data-id="{{$park->id}}">
                     <td class="parks_item-value">{{$park->name}}</td>
                     <td class="parks_item-value">{{$park->address}}</td>
                     <td class="parks_item-value">{{$park->work_schedule}}</td>

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ParkController extends Controller
 {
+    // заголовки выводимых таблиц
+    protected $headers = ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы'];
+
     /*
      *  вывод страницы главного меню приложения
      */
@@ -29,7 +32,7 @@ class ParkController extends Controller
 
         return view('manager.manager', [
             'parks' => $allParks,
-            'headers' => ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы']
+            'headers' => $this->headers
         ]);
     }
 
@@ -42,7 +45,7 @@ class ParkController extends Controller
 
         return view('park_edit.park_edit', [
             'park' => $park,
-            'headers' => ['name' => 'Название', 'address' => 'Адрес', 'work_schedule' => 'График работы']
+            'headers' => $this->headers
         ]);
     }
 
@@ -52,14 +55,51 @@ class ParkController extends Controller
      */
     public function update(Request $request)
     {
+        // делаем кастомную валидациюю Встроенная не проходит, поскольку
+        // при возврате ошибок средствами Ларавел теряются динамически созданные поля
+        // с новыми машинами
+        $errors = [];
+        foreach ($this->headers as $key => $value) {
+            if (!$request->$key and $key !== 'work_schedule') {
+                $errors[] = [$key, 'Это поле должно быть заполнено!'];
+            }
+        }
 
-        $validatedData = $request->validate([
-            'name' => 'required|min:2',
-            'address' => 'required|min:10',
-        ]);
+        if ($request->has('newTruckNames')) {
+            for ($i = 0; $i < count($request->newTruckNames); $i++) {
+                if (!$request->newTruckNames[$i]) {
+                    $errors[] = ['truck_'.$i, 'Это поле должно быть заполнено!'];
+                }
+            }
+            for ($i = 0; $i < count($request->newTruckDrivers); $i++) {
+                if (!$request->newTruckDrivers[$i]) {
+                    $errors[] = ['driver_'.$i, 'Это поле должно быть заполнено!'];
+                }
+            }
+        }
+
+        if ($errors) return response()->json($errors);
+
+        dd($request->all());
+
+//        $validatedData = $request->validate([
+//            'name' => 'required|min:2',
+//            'address' => 'required|min:10',
+//            'trucks.*.*' => 'required|max:50'
+//        ]);
+
+//        if ($request->has('trucks')) {
+//            $array = $request->trucks;
+//
+//            foreach (array_keys($array) as $fieldKey) {
+//                foreach ($array[$fieldKey] as $key => $value) {
+//                    $newArray[$key][$fieldKey] = $value;
+//                }
+//            }
+//        }
 
 
-        return redirect(route('park_show'));
+        return 'ok';
     }
 
 

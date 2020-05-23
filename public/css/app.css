@@ -11010,3 +11010,66 @@ body * {
   text-align: center;
 }
 
+.parkEdit {
+  flex: 1;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 50px 100px;
+  margin: 0 auto;
+  color: #666;
+}
+
+.parkEdit_form {
+  background: #d8fffe;
+  padding: 40px 15px 20px;
+  border-radius: 5px;
+  box-shadow: 7px 7px 7px lightblue;
+}
+
+.parkEdit_header {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.parkEdit_item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.parkEdit_item-title {
+  width: 150px;
+}
+
+.parkEdit_item-value {
+  width: 500px;
+  padding: 0 10px;
+}
+
+.parkEdit_trucksHeader {
+  font-size: 30px;
+  font-weight: 700;
+  border-bottom: 3px solid #666;
+}
+
+.parkEdit .trucksBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.parkEdit .trucksBlock_item {
+  width: 200px;
+}
+
+.parkEdit .is-invalid {
+  border: 2px solid red;
+}
+
+.parkEdit .is-error {
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  padding-left: 12px;
+}
+

@@ -1,7 +1,7 @@
 // обработка удаления парка
-$('.mod_delete').click(function(e) {
+$('.parks_item-value.mod_delete').click(function(e) {
 
-   axios.delete('/park_delete', {params: { id: $(this).parent().data('park').id }
+   axios.delete('/park_delete', {params: { id: $(this).parent().data('id') }
    }).then((response) => window.location.reload());
 });
 

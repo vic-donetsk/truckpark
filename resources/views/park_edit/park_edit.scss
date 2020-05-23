@@ -1,0 +1,62 @@
+.parkEdit {
+    flex:    1;
+
+    width:   fit-content;
+    padding: 50px 100px;
+    margin:  0 auto;
+    color:   #666;
+
+    &_form {
+        background:    #d8fffe;
+        padding:       40px 15px 20px;
+        border-radius: 5px;
+        box-shadow:    7px 7px 7px lightblue;
+    }
+
+    &_header {
+        font-size:   24px;
+        font-weight: bold;
+    }
+
+    &_item {
+        display:       flex;
+        align-items:   center;
+        margin-top: 10px;
+
+        &-title {
+            width: 150px;
+        }
+
+        &-value {
+            width:   500px;
+            padding: 0 10px;
+        }
+    }
+
+    &_trucksHeader {
+        font-size:     30px;
+        font-weight:   700;
+        border-bottom: 3px solid #666;
+    }
+
+    .trucksBlock {
+        display:         flex;
+        justify-content: center;
+
+        &_item {
+            width: 200px;
+        }
+    }
+
+
+    .is-invalid {
+        border: 2px solid red;
+    }
+
+    .is-error {
+        color: red;
+        font-weight: bold;
+        font-size: 12px;
+        padding-left: 12px;
+    }
+}
