@@ -80,8 +80,22 @@
                 cursor: pointer;
             }
         }
+
+        &_add {
+            margin: 20px 0;
+            transform: translateX(-22px);
+        }
+
     }
 
+    &_buttons-item {
+        margin: 0 15px;
+        padding: 4px 10px;
+
+        & a {
+            text-decoration: none;
+        }
+    }
 
     .is-invalid {
         border: 2px solid red;

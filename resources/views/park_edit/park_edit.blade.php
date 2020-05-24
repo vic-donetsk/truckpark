@@ -36,12 +36,18 @@
                 @endforeach
             @endisset
             <div class="trucksBlock mod_add">
-                <div class="trucksBlock_add">Добавить</div>
+                <div class="trucksBlock_add">
+                    <svg class="svg-icon">
+                        <use xlink:href="#svgAdd"/>
+                    </svg>
+                </div>
             </div>
 
             <div class="parkEdit_buttons">
                 <button type="submit" class="parkEdit_buttons-item mod_accept">Сохранить</button>
-                <a href="{{route('park_show')}}" class="parkEdit_buttons-item mod_close">Отмена</a>
+                <button class="parkEdit_buttons-item mod_close">
+                    <a href="{{route('park_show')}}">Отмена</a>
+                </button>
             </div>
         </form>
 

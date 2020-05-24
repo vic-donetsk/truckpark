@@ -5,14 +5,14 @@ let headers = ['id', 'name', 'address', 'work_schedule'];
 $('.trucksBlock_add').click(function () {
 
     let inputLayout = `<div class="trucksBlock">
-                          <div>
+                          <div class="trucksBlock_wrapper">
                               <div class="trucksBlock_item">
                                   <input type="text" name="trucks[name][]" class="modTruckName">
                                   <input type="hidden" name="trucks[id][]" class="modTruckId">
                               </div>
                               <div class="is-error"></div>
                           </div>
-                          <div>
+                          <div class="trucksBlock_wrapper">
                               <div class="trucksBlock_item">
                                   <input type="text" name="trucks[driver][]" class="modTruckDriver" disabled>
                               </div>
@@ -31,6 +31,7 @@ $('.trucksBlock_add').click(function () {
 // после ввода номера проверяем наличие машины в БД
 $parkEditForm.focusout(function (e) {
     if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
+        console.log('come to fuck');
         // временно запрещаем отправку формы
         $parkEditForm.unbind('submit', parkFormSubmit);
         axios.get('/truck', {
@@ -38,14 +39,15 @@ $parkEditForm.focusout(function (e) {
                 name: $(e.target).val()
             }
         }).then((response) => {
-            let $driverInput = $(e.target).parent().next().children('.modTruckDriver');
+            let $driverInput = $(e.target).closest('.trucksBlock_wrapper').next().find('.modTruckDriver');
+            console.log($driverInput);
             // если машина уже в базе
             if (response.data) {
                 // заполняем водителя, заносим ИД-шку и снимаем ошибку, если была
                 $driverInput.val(response.data.driver);
                 $(e.target).next('input').val(response.data.id);
-                if ($driverInput.hasClass('is-invalid')) {
-                    $driverInput.removeClass('is-invalid').next().empty();
+                if ($driverInput.parent().hasClass('is-invalid')) {
+                    $driverInput.parent().removeClass('is-invalid').next().empty();
                 }
             } else {
                 // если машины в базе нет - обнуляем ИД и разрешаем ввод данных водителя

@@ -11118,6 +11118,20 @@ body * {
   cursor: pointer;
 }
 
+.parkEdit .trucksBlock_add {
+  margin: 20px 0;
+  transform: translateX(-22px);
+}
+
+.parkEdit_buttons-item {
+  margin: 0 15px;
+  padding: 4px 10px;
+}
+
+.parkEdit_buttons-item a {
+  text-decoration: none;
+}
+
 .parkEdit .is-invalid {
   border: 2px solid red;
 }

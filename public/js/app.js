@@ -37352,28 +37352,30 @@ var $parkEditForm = $('.parkEdit_form');
 var headers = ['id', 'name', 'address', 'work_schedule']; // добавляем машину на странице автопарка
 
 $('.trucksBlock_add').click(function () {
-  var inputLayout = "<div class=\"trucksBlock\">\n                          <div>\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[name][]\" class=\"modTruckName\">\n                                  <input type=\"hidden\" name=\"trucks[id][]\" class=\"modTruckId\">\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div>\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[driver][]\" class=\"modTruckDriver\" disabled>\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"trucksBlock_delete\">\n                            <svg class=\"svg-delete\">\n                                <use xlink:href=\"#svgDelete\"/>\n                            </svg>\n                          </div>\n                       </div>";
+  var inputLayout = "<div class=\"trucksBlock\">\n                          <div class=\"trucksBlock_wrapper\">\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[name][]\" class=\"modTruckName\">\n                                  <input type=\"hidden\" name=\"trucks[id][]\" class=\"modTruckId\">\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"trucksBlock_wrapper\">\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[driver][]\" class=\"modTruckDriver\" disabled>\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"trucksBlock_delete\">\n                            <svg class=\"svg-delete\">\n                                <use xlink:href=\"#svgDelete\"/>\n                            </svg>\n                          </div>\n                       </div>";
   $(this).parent().before(inputLayout);
 }); // после ввода номера проверяем наличие машины в БД
 
 $parkEditForm.focusout(function (e) {
   if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
-    // временно запрещаем отправку формы
+    console.log('come to fuck'); // временно запрещаем отправку формы
+
     $parkEditForm.unbind('submit', parkFormSubmit);
     axios.get('/truck', {
       params: {
         name: $(e.target).val()
       }
     }).then(function (response) {
-      var $driverInput = $(e.target).parent().next().children('.modTruckDriver'); // если машина уже в базе
+      var $driverInput = $(e.target).closest('.trucksBlock_wrapper').next().find('.modTruckDriver');
+      console.log($driverInput); // если машина уже в базе
 
       if (response.data) {
         // заполняем водителя, заносим ИД-шку и снимаем ошибку, если была
         $driverInput.val(response.data.driver);
         $(e.target).next('input').val(response.data.id);
 
-        if ($driverInput.hasClass('is-invalid')) {
-          $driverInput.removeClass('is-invalid').next().empty();
+        if ($driverInput.parent().hasClass('is-invalid')) {
+          $driverInput.parent().removeClass('is-invalid').next().empty();
         }
       } else {
         // если машины в базе нет - обнуляем ИД и разрешаем ввод данных водителя
