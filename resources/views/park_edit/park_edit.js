@@ -6,15 +6,23 @@ $('.trucksBlock_add').click(function () {
 
     let inputLayout = `<div class="trucksBlock">
                           <div>
-                              <input type="text" name="trucks[name][]" class="trucksBlock_item modTruckName">
-                              <input type="hidden" name="trucks[id][]" class="modTruckId">
+                              <div class="trucksBlock_item">
+                                  <input type="text" name="trucks[name][]" class="modTruckName">
+                                  <input type="hidden" name="trucks[id][]" class="modTruckId">
+                              </div>
                               <div class="is-error"></div>
                           </div>
                           <div>
-                              <input type="text" name="trucks[driver][]" class="trucksBlock_item modTruckDriver" disabled>
+                              <div class="trucksBlock_item">
+                                  <input type="text" name="trucks[driver][]" class="modTruckDriver" disabled>
+                              </div>
                               <div class="is-error"></div>
                           </div>
-                          <div class="trucksBlock_item mod_delete">Удалить</div>
+                          <div class="trucksBlock_delete">
+                            <svg class="svg-delete">
+                                <use xlink:href="#svgDelete"/>
+                            </svg>
+                          </div>
                        </div>`;
 
     $(this).parent().before(inputLayout);
@@ -97,9 +105,9 @@ function parkFormSubmit(e) {
                     // если не введены данные добавляемых машин
                     let errorElem = errorData[0].split('_');
                     if (errorElem[0] === 'truck') {
-                        $(newTruckNames[errorElem[1]]).addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+                        $(newTruckNames[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
                     } else {
-                        $(newTruckDrivers[errorElem[1]]).addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+                        $(newTruckDrivers[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
                     }
 
                 }
@@ -111,7 +119,7 @@ function parkFormSubmit(e) {
 // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 $parkEditForm.focusin(function (e) {
     if (e.target.tagName === 'INPUT') {
-        $(e.target).removeClass('is-invalid').siblings('.is-error').empty();
+        $(e.target).parent().removeClass('is-invalid').siblings('.is-error').empty();
     }
 });
 
@@ -119,7 +127,7 @@ $parkEditForm.focusin(function (e) {
 // добавленную в процессе редактирования новую машину
 $parkEditForm.click(function (e) {
     if ($(e.target).hasClass('mod_delete')) {
-        $(e.target).parent().remove();
+        $(e.target).closest('.trucksBlock').remove();
     }
 });
 

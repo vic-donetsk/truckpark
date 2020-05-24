@@ -3,8 +3,15 @@
     flex:     1;
     position: relative;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 25px;
+
+
     table {
-        margin:          50px auto;
+        margin:          25px auto 30px;
 
         border-collapse: collapse;
         border:          2px solid #000;
@@ -17,6 +24,15 @@
         th {
             text-align: center;
         }
+
+        .mod_delete, .mod_edit {
+            text-align: center;
+        }
     }
 
+    &_add {
+        width: 30px;
+        height: 30px;
+    }
 }
+

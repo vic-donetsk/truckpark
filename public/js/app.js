@@ -37352,7 +37352,7 @@ var $parkEditForm = $('.parkEdit_form');
 var headers = ['id', 'name', 'address', 'work_schedule']; // добавляем машину на странице автопарка
 
 $('.trucksBlock_add').click(function () {
-  var inputLayout = "<div class=\"trucksBlock\">\n                          <div>\n                              <input type=\"text\" name=\"trucks[name][]\" class=\"trucksBlock_item modTruckName\">\n                              <input type=\"hidden\" name=\"trucks[id][]\" class=\"modTruckId\">\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div>\n                              <input type=\"text\" name=\"trucks[driver][]\" class=\"trucksBlock_item modTruckDriver\" disabled>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"trucksBlock_item mod_delete\">\u0423\u0434\u0430\u043B\u0438\u0442\u044C</div>\n                       </div>";
+  var inputLayout = "<div class=\"trucksBlock\">\n                          <div>\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[name][]\" class=\"modTruckName\">\n                                  <input type=\"hidden\" name=\"trucks[id][]\" class=\"modTruckId\">\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div>\n                              <div class=\"trucksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[driver][]\" class=\"modTruckDriver\" disabled>\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"trucksBlock_delete\">\n                            <svg class=\"svg-delete\">\n                                <use xlink:href=\"#svgDelete\"/>\n                            </svg>\n                          </div>\n                       </div>";
   $(this).parent().before(inputLayout);
 }); // после ввода номера проверяем наличие машины в БД
 
@@ -37448,9 +37448,9 @@ function parkFormSubmit(e) {
             var errorElem = errorData[0].split('_');
 
             if (errorElem[0] === 'truck') {
-              $(newTruckNames[errorElem[1]]).addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+              $(newTruckNames[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
             } else {
-              $(newTruckDrivers[errorElem[1]]).addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+              $(newTruckDrivers[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
             }
           }
         }
@@ -37467,14 +37467,14 @@ function parkFormSubmit(e) {
 
 $parkEditForm.focusin(function (e) {
   if (e.target.tagName === 'INPUT') {
-    $(e.target).removeClass('is-invalid').siblings('.is-error').empty();
+    $(e.target).parent().removeClass('is-invalid').siblings('.is-error').empty();
   }
 }); // удаляет ранее привязанную к парку машину или
 // добавленную в процессе редактирования новую машину
 
 $parkEditForm.click(function (e) {
   if ($(e.target).hasClass('mod_delete')) {
-    $(e.target).parent().remove();
+    $(e.target).closest('.trucksBlock').remove();
   }
 });
 

@@ -19,9 +19,9 @@
     }
 
     &_item {
-        display:       flex;
-        align-items:   center;
-        margin-top: 10px;
+        display:     flex;
+        align-items: center;
+        margin-top:  10px;
 
         &-title {
             width: 150px;
@@ -34,6 +34,8 @@
     }
 
     &_trucksHeader {
+        margin-top:    20px;
+        margin-bottom: 20px;
         font-size:     30px;
         font-weight:   700;
         border-bottom: 3px solid #666;
@@ -43,8 +45,40 @@
         display:         flex;
         justify-content: center;
 
+        &_item, &_title {
+            width: 280px;
+            margin:    5px;
+            padding:   5px;
+        }
+
+        &_title {
+            font-size:   16px;
+            font-weight: bold;
+            color:       #000;
+        }
+
         &_item {
-            width: 200px;
+            background: #fff;
+            border: 1px solid black;
+
+            input {
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                background: #fff;
+            }
+        }
+
+        &_delete {
+            margin:    5px;
+            padding:   5px;
+
+            .svg-delete {
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+            }
         }
     }
 
@@ -54,9 +88,9 @@
     }
 
     .is-error {
-        color: red;
-        font-weight: bold;
-        font-size: 12px;
+        color:        red;
+        font-weight:  bold;
+        font-size:    12px;
         padding-left: 12px;
     }
 }

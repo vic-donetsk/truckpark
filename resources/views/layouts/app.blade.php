@@ -78,6 +78,10 @@
         <main>
             @yield('content')
         </main>
+        <div style="position:absolute;visibility: hidden;
+        opacity: 0;display: none">
+            @include('layouts.sprite')
+        </div>
     </div>
 </body>
 </html>

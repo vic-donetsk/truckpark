@@ -10940,6 +10940,12 @@ body * {
   box-sizing: border-box;
 }
 
+.svg-icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
 .mainPage {
   flex: 1;
   display: flex;
@@ -10992,10 +10998,15 @@ body * {
 .parks {
   flex: 1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 25px;
 }
 
 .parks table {
-  margin: 50px auto;
+  margin: 25px auto 30px;
   border-collapse: collapse;
   border: 2px solid #000;
 }
@@ -11008,6 +11019,16 @@ body * {
 
 .parks table th {
   text-align: center;
+}
+
+.parks table .mod_delete,
+.parks table .mod_edit {
+  text-align: center;
+}
+
+.parks_add {
+  width: 30px;
+  height: 30px;
 }
 
 .parkEdit {
@@ -11048,6 +11069,8 @@ body * {
 }
 
 .parkEdit_trucksHeader {
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 30px;
   font-weight: 700;
   border-bottom: 3px solid #666;
@@ -11058,8 +11081,41 @@ body * {
   justify-content: center;
 }
 
+.parkEdit .trucksBlock_item,
+.parkEdit .trucksBlock_title {
+  width: 280px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.parkEdit .trucksBlock_title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
 .parkEdit .trucksBlock_item {
-  width: 200px;
+  background: #fff;
+  border: 1px solid black;
+}
+
+.parkEdit .trucksBlock_item input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: #fff;
+}
+
+.parkEdit .trucksBlock_delete {
+  margin: 5px;
+  padding: 5px;
+}
+
+.parkEdit .trucksBlock_delete .svg-delete {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .parkEdit .is-invalid {

@@ -18,16 +18,20 @@
             <div class="parkEdit_trucksHeader">Машины</div>
 
             <div class="trucksBlock">
-                <div class="trucksBlock_item">Номер машины</div>
-                <div class="trucksBlock_item">Имя водителя</div>
-                <div class="trucksBlock_item"></div>
+                <div class="trucksBlock_title">Номер машины</div>
+                <div class="trucksBlock_title">Имя водителя</div>
+                <div class="trucksBlock_delete"></div>
             </div>
             @isset($park->trucks)
                 @foreach($park->trucks as $truck)
                     <div class="trucksBlock">
                         <div class="trucksBlock_item mod_name" data-id="{{$truck->id}}">{{$truck->name}}</div>
                         <div class="trucksBlock_item mod_driver">{{$truck->driver}}</div>
-                        <div class="trucksBlock_item mod_delete">Удалить</div>
+                        <div class="trucksBlock_delete">
+                            <svg class="svg-delete">
+                                <use xlink:href="#svgDelete" class="mod_delete"/>
+                            </svg>
+                        </div>
                     </div>
                 @endforeach
             @endisset
