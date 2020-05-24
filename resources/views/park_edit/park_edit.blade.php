@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="parkEdit">
-        <form action="{{route('park_update')}}" method="POST" class="parkEdit_form">
-            {{--            @csrf--}}
+        <form class="parkEdit_form">
             <div class="parkEdit_header">Автопарк</div>
             @foreach ($headers as $key => $header)
                 <div class="parkEdit_item">
