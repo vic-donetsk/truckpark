@@ -55,16 +55,17 @@ class ParkController extends Controller
      */
     public function update(Request $request)
     {
-        // делаем кастомную валидациюю Встроенная не проходит, поскольку
+        // делаем кастомную валидацию. Встроенная не проходит, поскольку
         // при возврате ошибок средствами Ларавел теряются динамически созданные поля
         // с новыми машинами
         $errors = [];
+        // проверка полей автопарка
         foreach ($this->headers as $key => $value) {
             if (!$request->$key and $key !== 'work_schedule') {
                 $errors[] = [$key, 'Это поле должно быть заполнено!'];
             }
         }
-
+        // проверка полей добавленных машин
         if ($request->has('newTruckNames')) {
             for ($i = 0; $i < count($request->newTruckNames); $i++) {
                 if (!$request->newTruckNames[$i]) {
@@ -77,27 +78,38 @@ class ParkController extends Controller
                 }
             }
         }
-
+        // возврат ошибок валидации
         if ($errors) return response()->json($errors);
 
-        dd($request->all());
+        // сохранение/добавление автопарка
 
-//        $validatedData = $request->validate([
-//            'name' => 'required|min:2',
-//            'address' => 'required|min:10',
-//            'trucks.*.*' => 'required|max:50'
-//        ]);
+        // находим или создаём автопарк
+        $park = ($request->id) ? Park::find($request->id) : new Park;
 
-//        if ($request->has('trucks')) {
-//            $array = $request->trucks;
-//
-//            foreach (array_keys($array) as $fieldKey) {
-//                foreach ($array[$fieldKey] as $key => $value) {
-//                    $newArray[$key][$fieldKey] = $value;
-//                }
-//            }
-//        }
+        // вначале сохраняем данные самого автопарка
+        foreach ($this->headers as $header => $value) {
+            $park->{$header} = $request->{$header};
+        }
+        $park->save();
 
+        // затем делаем привязку машин к автопарку
+        $newTrucks = [];
+        if ($request->newTruckIds) {
+            foreach ($request->newTruckIds as $key => $id) {
+                if ($id) {
+                    $newTrucks[] = $id;
+                } else {
+                    // создаём новую машину в БД
+                    $truck = new Truck();
+                    $truck->name = $request->newTruckNames[$key];
+                    $truck->driver = $request->newTruckDrivers[$key];
+                    $truck->user_id = Auth::id();
+                    $truck->save();
+                    $newTrucks[] = $truck->id;
+                }
+            }
+        }
+        $park->trucks()->sync(array_merge($request->oldTruckIds, $newTrucks));
 
         return 'ok';
     }

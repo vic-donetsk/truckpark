@@ -26,6 +26,7 @@
                 </tr>
             @endforeach
         </table>
+        <a href="{{route('park_edit')}}" class="parks_add">Добавить</a>
 
 
     </div>

@@ -69,8 +69,8 @@ $parkEditForm.submit(function (e) {
     }).get();
 
     // формируем данные оставшихся после редактирования ранее привязанных машин
-    let oldTruckNames = $('.trucksBlock_item.mod_name');
-    axiosParams.oldTruckNames = oldTruckNames.map(function () {
+    let oldTruckIds = $('.trucksBlock_item.mod_name');
+    axiosParams.oldTruckIds = oldTruckIds.map(function () {
         return $(this).data('id');
     }).get();
 
