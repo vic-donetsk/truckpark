@@ -31,7 +31,6 @@ $('.trucksBlock_add').click(function () {
 // после ввода номера проверяем наличие машины в БД
 $parkEditForm.focusout(function (e) {
     if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
-        console.log('come to fuck');
         // временно запрещаем отправку формы
         $parkEditForm.unbind('submit', parkFormSubmit);
         axios.get('/truck', {
@@ -40,7 +39,6 @@ $parkEditForm.focusout(function (e) {
             }
         }).then((response) => {
             let $driverInput = $(e.target).closest('.trucksBlock_wrapper').next().find('.modTruckDriver');
-            console.log($driverInput);
             // если машина уже в базе
             if (response.data) {
                 // заполняем водителя, заносим ИД-шку и снимаем ошибку, если была
@@ -67,8 +65,6 @@ $parkEditForm.submit((e) => {
 $parkEditForm.bind('submit', parkFormSubmit);
 
 function parkFormSubmit(e) {
-    // e.preventDefault();
-    console.log('com to function');
     // формируем данные полей автопарка
     let axiosParams = {};
     for (let oneHeader of headers) {
@@ -111,12 +107,11 @@ function parkFormSubmit(e) {
                     } else {
                         $(newTruckDrivers[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
                     }
-
                 }
             }
         }
     });
-};
+}
 
 // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 $parkEditForm.focusin(function (e) {

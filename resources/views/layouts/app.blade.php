@@ -80,7 +80,7 @@
         </main>
         <div style="position:absolute;visibility: hidden;
         opacity: 0;display: none">
-            @include('layouts.sprite')
+            @include('sprite')
         </div>
     </div>
 </body>

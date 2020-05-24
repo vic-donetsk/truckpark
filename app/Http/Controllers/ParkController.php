@@ -25,7 +25,6 @@ class ParkController extends Controller
      */
     public function show()
     {
-
         $allParks = Park::with('trucks')->get();
 
         $allTrucks = Truck::all();
@@ -48,7 +47,6 @@ class ParkController extends Controller
             'headers' => $this->headers
         ]);
     }
-
 
     /*
      *  создает новый или обновляет существующий парк
@@ -113,7 +111,6 @@ class ParkController extends Controller
 
         return 'ok';
     }
-
 
     /*
      *  удаление парка из БД

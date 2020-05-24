@@ -37358,16 +37358,14 @@ $('.trucksBlock_add').click(function () {
 
 $parkEditForm.focusout(function (e) {
   if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
-    console.log('come to fuck'); // временно запрещаем отправку формы
-
+    // временно запрещаем отправку формы
     $parkEditForm.unbind('submit', parkFormSubmit);
     axios.get('/truck', {
       params: {
         name: $(e.target).val()
       }
     }).then(function (response) {
-      var $driverInput = $(e.target).closest('.trucksBlock_wrapper').next().find('.modTruckDriver');
-      console.log($driverInput); // если машина уже в базе
+      var $driverInput = $(e.target).closest('.trucksBlock_wrapper').next().find('.modTruckDriver'); // если машина уже в базе
 
       if (response.data) {
         // заполняем водителя, заносим ИД-шку и снимаем ошибку, если была
@@ -37394,9 +37392,7 @@ $parkEditForm.submit(function (e) {
 $parkEditForm.bind('submit', parkFormSubmit);
 
 function parkFormSubmit(e) {
-  // e.preventDefault();
-  console.log('com to function'); // формируем данные полей автопарка
-
+  // формируем данные полей автопарка
   var axiosParams = {};
 
   var _iterator = _createForOfIteratorHelper(headers),
@@ -37463,9 +37459,8 @@ function parkFormSubmit(e) {
       }
     }
   });
-}
+} // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 
-; // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 
 $parkEditForm.focusin(function (e) {
   if (e.target.tagName === 'INPUT') {
