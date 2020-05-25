@@ -14,32 +14,34 @@ class TruckController extends Controller
     /*
      *  страница водителя - работа со своими машинами
      */
-    public function show() {
+    public function show()
+    {
 
         $trucks = Truck::with('parks')->where('user_id', Auth::id())->get();
 
-        return view('trucks.trucks_show', [ 'trucks' => $trucks, 'headers' => $this->headers]);
+        return view('trucks.trucks_show', ['trucks' => $trucks, 'headers' => $this->headers]);
     }
 
     /*
      * страница менеджера - просмотр полного справочника автомобилей
      */
-    public function index() {
+    public function index()
+    {
         $trucks = Truck::with('parks')->get();
 
-        return view('trucks.trucks_show', [ 'trucks' => $trucks, 'headers' => $this->headers]);
+        return view('trucks.trucks_show', ['trucks' => $trucks, 'headers' => $this->headers]);
     }
 
     /*
      * проверка наличия номера автомобиля в базе данных
      */
-    public function info(Request $request) {
+    public function info(Request $request)
+    {
         if ($request->has('name')) {
             try {
-                $truck = Truck::where('name', $request->name)->firstOrFail();
+                $truck = Truck::where('name', $this->translit($request->name))->firstOrFail();
                 return response()->json(['id' => $truck->id, 'driver' => $truck->driver]);
-            }
-            catch (\Throwable $e) {
+            } catch (\Throwable $e) {
                 return null;
             }
         }
@@ -48,16 +50,17 @@ class TruckController extends Controller
     /*
      * создание/редактирование автомобиля
      */
-    public function edit(Request $request, int $id = null) {
+    public function edit(Request $request, int $id = null)
+    {
 
         $parks = Park::all();
 
         if ($id) {
             $truck = Truck::with('parks')->find($id);
-            $free_parks = $parks->diff($truck->parks)->pluck('name','id');
+            $free_parks = $parks->diff($truck->parks)->pluck('name', 'id');
         } else {
             $truck = null;
-            $free_parks = $parks->pluck('name','id');
+            $free_parks = $parks->pluck('name', 'id');
         }
 
         return view('trucks.truck_edit', [
@@ -68,7 +71,7 @@ class TruckController extends Controller
     }
 
     /*
-     *  создает новый или обновляет существующий парк
+     *  создает новый автомобиль или обновляет данные существующего
      */
     public function update(Request $request)
     {
@@ -85,10 +88,9 @@ class TruckController extends Controller
             // проверяем на дубликат госномера
             if ($key === 'name' and $request->name) {
                 try {
-                    $dublicat = Truck::where([['name', $request->name], ['id', '<>', $request->id]])->firstOrFail();
+                    $dublicat = Truck::where([['name', $this->translit($request->name)], ['id', '<>', $request->id]])->firstOrFail();
                     $errors[] = [$key, 'Автомобиль с таким номером уже есть в базе!'];
-                }
-                catch (\Throwable $e) {
+                } catch (\Throwable $e) {
                 }
             }
         }
@@ -102,7 +104,7 @@ class TruckController extends Controller
 
         // вначале сохраняем данные самого автопарка
         foreach ($this->headers as $header => $value) {
-            $truck->{$header} = $request->{$header};
+            ($header === 'name') ? $truck->{$header} = $this->translit($request->{$header}) : $truck->{$header} = $request->{$header};
         }
         $truck->user_id = Auth::id();
         $truck->save();
