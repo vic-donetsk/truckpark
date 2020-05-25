@@ -5,7 +5,7 @@
         <h2>Сведения об автомобилях</h2>
 
         @include('trucks.trucks_button')
-        
+
         <table>
             <tr>
                 @foreach ($headers as $header)
