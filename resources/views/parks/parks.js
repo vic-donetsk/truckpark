@@ -32,7 +32,6 @@ $('.trucksBlock_add').click(function () {
 $parkEditForm.focusout(function (e) {
     if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
         // временно запрещаем отправку формы
-        // $parkEditForm.unbind('submit', parkFormSubmit);
         $('.parkEdit_buttons-item.mod_accept').prop('disabled', true);
         axios.get('/truck', {
             params: {
@@ -52,8 +51,7 @@ $parkEditForm.focusout(function (e) {
                 // если машины в базе нет - обнуляем ИД и разрешаем ввод данных водителя
                 $driverInput.prop('disabled', false).val('').focus();
             }
-            // восстанавливаем обработчик отправки формы
-            // $parkEditForm.bind('submit', parkFormSubmit);
+            // восстанавливаем возможность отправки формы
             $('.parkEdit_buttons-item.mod_accept').prop('disabled', false);
         });
     }
@@ -61,12 +59,7 @@ $parkEditForm.focusout(function (e) {
 
 // отправка заполненной формы на валидацию
 $parkEditForm.submit((e) => {
-   e.preventDefault();
-});
-
-$parkEditForm.bind('submit', parkFormSubmit);
-
-function parkFormSubmit(e) {
+    e.preventDefault();
     // формируем данные полей автопарка
     let axiosParams = {};
     for (let oneHeader of headers) {
@@ -113,7 +106,7 @@ function parkFormSubmit(e) {
             }
         }
     });
-}
+});
 
 // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 $parkEditForm.focusin(function (e) {
@@ -132,9 +125,10 @@ $parkEditForm.click(function (e) {
 });
 
 // обработка удаления парка
-$('.parks_item-value.mod_delete').click(function(e) {
+$('.parks_item-value.mod_delete').click(function (e) {
 
-    axios.delete('/park_delete', {params: { id: $(this).parent().data('id') }
+    axios.delete('/park_delete', {
+        params: {id: $(this).parent().data('id')}
     }).then((response) => window.location.reload());
 });
 
