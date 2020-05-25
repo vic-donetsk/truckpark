@@ -90,7 +90,11 @@ $truckEditForm.click(function (e) {
     }
 });
 
+// обработка удаления автомобиля
+$('.trucks_item-value.mod_delete').click(function(e) {
 
-
+    axios.delete('/truck_delete', {params: { id: $(this).parent().data('id') }
+    }).then((response) => window.location.reload());
+});
 
 
