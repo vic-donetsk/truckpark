@@ -37412,9 +37412,7 @@ $parkEditForm.focusin(function (e) {
 // добавленную в процессе редактирования новую машину
 
 $parkEditForm.click(function (e) {
-  if ($(e.target).hasClass('mod_delete')) {
-    $(e.target).closest('.trucksBlock').remove();
-  }
+  $(e.target).hasClass('mod_delete') && $(e.target).closest('.trucksBlock').remove();
 }); // обработка удаления парка
 
 $('.parks_item-value.mod_delete').click(function (e) {

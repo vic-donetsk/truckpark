@@ -119,9 +119,7 @@ $parkEditForm.focusin(function (e) {
 // удаляет ранее привязанную к парку машину или
 // добавленную в процессе редактирования новую машину
 $parkEditForm.click(function (e) {
-    if ($(e.target).hasClass('mod_delete')) {
-        $(e.target).closest('.trucksBlock').remove();
-    }
+    $(e.target).hasClass('mod_delete') && $(e.target).closest('.trucksBlock').remove();
 });
 
 // обработка удаления парка
