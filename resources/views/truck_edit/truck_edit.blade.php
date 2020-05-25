@@ -31,9 +31,17 @@
                             </svg>
                         </div>
                     </div>
-
                 @endforeach
             @endisset
+
+            <div class="parksBlock mod_select" data-set="{{$freeParks}}">
+                <div class="parksBlock_item">
+                    <select type="text" name="parks[]" class="selectParkName">
+
+                    </select>
+                </div>
+            </div>
+
             <div class="parksBlock mod_add">
                 <div class="parksBlock_add">
                     <svg class="svg-icon">

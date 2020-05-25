@@ -62,6 +62,15 @@ class ParkController extends Controller
             if (!$request->$key and $key !== 'work_schedule') {
                 $errors[] = [$key, 'Это поле должно быть заполнено!'];
             }
+            // проверяем на дубликат названия
+            if ($key === 'name' and $request->name) {
+                try {
+                    $dublicat = Park::where([['name', $request->name], ['id', '<>', $request->id]])->firstOrFail();
+                    $errors[] = [$key, 'Автопарк с таким названием уже зарегистрирован'];
+                }
+                catch (\Throwable $e) {
+                }
+            }
         }
         // проверка полей добавленных машин
         if ($request->has('newTruckNames')) {

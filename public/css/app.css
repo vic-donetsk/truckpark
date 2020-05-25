@@ -11153,6 +11153,8 @@ body * {
 }
 
 .truckEdit_form {
+  display: flex;
+  flex-direction: column;
   background: #d8fffe;
   padding: 40px 15px 20px;
   border-radius: 5px;
@@ -11232,6 +11234,17 @@ body * {
 .truckEdit .parksBlock_add {
   margin: 20px 0;
   transform: translateX(-22px);
+}
+
+.truckEdit .parksBlock.mod_select {
+  display: none;
+  margin: 0 0 45px 157px;
+}
+
+.truckEdit .parksBlock.mod_select .selectParkName {
+  width: 100%;
+  border: none;
+  outline: none;
 }
 
 .truckEdit_buttons-item {

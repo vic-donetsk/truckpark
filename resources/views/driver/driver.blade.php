@@ -27,15 +27,10 @@
                             </svg>
                         </a>
                     </td>
-{{--                    <td class="parks_item-value mod_delete" title="Удалить парк">--}}
-{{--                        <svg class="svg-icon">--}}
-{{--                            <use xlink:href="#svgDelete"/>--}}
-{{--                        </svg>--}}
-{{--                    </td>--}}
                 </tr>
             @endforeach
         </table>
-        <a href="{{route('park_edit')}}" class="parks_add" title="Добавить новый автомобиль">
+        <a href="{{route('truck_edit')}}" class="parks_add" title="Добавить новый автомобиль">
             <svg class="svg-icon">
                 <use xlink:href="#svgAdd"/>
             </svg>

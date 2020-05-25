@@ -33,4 +33,6 @@ Route::get('/my_trucks', 'TruckController@show')->name('truck_show')->middleware
 
 Route::get('/truck_edit/{id?}', 'TruckController@edit')->name('truck_edit')->middleware('auth', 'can:only-own-trucks');
 
+Route::post('/truck_update', 'TruckController@update')->name('truck_update')->middleware('auth', 'can:only-own-trucks');
+
 Route::get('/truck', 'TruckController@info')->name('truck_info')->middleware('auth');

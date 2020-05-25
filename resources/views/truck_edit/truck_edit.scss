@@ -7,6 +7,9 @@
     color:   #666;
 
     &_form {
+        display: flex;
+        flex-direction: column;
+
         background:    #d8fffe;
         padding:       40px 15px 20px;
         border-radius: 5px;
@@ -85,7 +88,18 @@
             margin:    20px 0;
             transform: translateX(-22px);
         }
+        &.mod_select {
+            display: none;
+            margin: 0 0 45px 157px;
+
+            .selectParkName {
+                width: 100%;
+                border: none;
+                outline: none;
+            }
+        }
     }
+
 
     &_buttons-item {
         margin:  0 15px;
