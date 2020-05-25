@@ -37225,39 +37225,11 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window.Vue = require('vue');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+__webpack_require__(/*! ../views/parks/parks */ "./resources/views/parks/parks.js");
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-// const app = new Vue({
-//     el: '#app',
-// });
-
-
-__webpack_require__(/*! ../views/manager/manager */ "./resources/views/manager/manager.js");
-
-__webpack_require__(/*! ../views/park_edit/park_edit */ "./resources/views/park_edit/park_edit.js");
-
-__webpack_require__(/*! ../views/truck_edit/truck_edit */ "./resources/views/truck_edit/truck_edit.js");
+__webpack_require__(/*! ../views/trucks/trucks */ "./resources/views/trucks/trucks.js");
 
 /***/ }),
 
@@ -37295,14 +37267,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
 
 /***/ }),
 
@@ -37317,30 +37281,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/views/manager/manager.js":
-/*!********************************************!*\
-  !*** ./resources/views/manager/manager.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// обработка удаления парка
-$('.parks_item-value.mod_delete').click(function (e) {
-  axios["delete"]('/park_delete', {
-    params: {
-      id: $(this).parent().data('id')
-    }
-  }).then(function (response) {
-    return window.location.reload();
-  });
-});
-
-/***/ }),
-
-/***/ "./resources/views/park_edit/park_edit.js":
-/*!************************************************!*\
-  !*** ./resources/views/park_edit/park_edit.js ***!
-  \************************************************/
+/***/ "./resources/views/parks/parks.js":
+/*!****************************************!*\
+  !*** ./resources/views/parks/parks.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37466,6 +37410,7 @@ function parkFormSubmit(e) {
 
 $parkEditForm.focusin(function (e) {
   if (e.target.tagName === 'INPUT') {
+    $(e.target).removeClass('is-invalid').siblings('.is-error').empty();
     $(e.target).parent().removeClass('is-invalid').siblings('.is-error').empty();
   }
 }); // удаляет ранее привязанную к парку машину или
@@ -37475,14 +37420,24 @@ $parkEditForm.click(function (e) {
   if ($(e.target).hasClass('mod_delete')) {
     $(e.target).closest('.trucksBlock').remove();
   }
+}); // обработка удаления парка
+
+$('.parks_item-value.mod_delete').click(function (e) {
+  axios["delete"]('/park_delete', {
+    params: {
+      id: $(this).parent().data('id')
+    }
+  }).then(function (response) {
+    return window.location.reload();
+  });
 });
 
 /***/ }),
 
-/***/ "./resources/views/truck_edit/truck_edit.js":
-/*!**************************************************!*\
-  !*** ./resources/views/truck_edit/truck_edit.js ***!
-  \**************************************************/
+/***/ "./resources/views/trucks/trucks.js":
+/*!******************************************!*\
+  !*** ./resources/views/trucks/trucks.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -37592,6 +37547,16 @@ $truckEditForm.click(function (e) {
     parksList[$elem.data('id')] = $elem.text();
     $(e.target).closest('.parksBlock').remove();
   }
+}); // обработка удаления автомобиля
+
+$('.trucks_item-value.mod_delete').click(function (e) {
+  axios["delete"]('/truck_delete', {
+    params: {
+      id: $(this).parent().data('id')
+    }
+  }).then(function (response) {
+    return window.location.reload();
+  });
 });
 
 /***/ }),

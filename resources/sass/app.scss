@@ -22,6 +22,6 @@ body, body * {
 }
 
 @import '../views/nav/nav';
-@import '../views/manager/manager';
-@import '../views/park_edit/park_edit';
-@import '../views/truck_edit/truck_edit';
+@import '../views/parks/parks_show';
+@import '../views/parks/park_edit';
+@import '../views/trucks/truck_edit';

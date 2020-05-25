@@ -29,10 +29,13 @@ Route::delete('/park_delete', 'ParkController@delete')->name('park_delete')->mid
 
 Route::get('/all_trucks', 'TruckController@index')->name('truck_index')->middleware('auth', 'can:all-parks');
 
+Route::delete('/truck_delete', 'TruckController@delete')->name('truck_delete')->middleware('auth','can:all-parks');
+
+Route::get('/truck', 'TruckController@info')->name('truck_info')->middleware('auth','can:all-parks');
+
 Route::get('/my_trucks', 'TruckController@show')->name('truck_show')->middleware('auth', 'can:only-own-trucks');
 
 Route::get('/truck_edit/{id?}', 'TruckController@edit')->name('truck_edit')->middleware('auth', 'can:only-own-trucks');
 
 Route::post('/truck_update', 'TruckController@update')->name('truck_update')->middleware('auth', 'can:only-own-trucks');
 
-Route::get('/truck', 'TruckController@info')->name('truck_info')->middleware('auth');

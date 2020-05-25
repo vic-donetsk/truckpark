@@ -18,14 +18,16 @@ class TruckController extends Controller
 
         $trucks = Truck::with('parks')->where('user_id', Auth::id())->get();
 
-        return view('driver.driver', [ 'trucks' => $trucks, 'headers' => $this->headers]);
+        return view('trucks.trucks_show', [ 'trucks' => $trucks, 'headers' => $this->headers]);
     }
 
     /*
      * страница менеджера - просмотр полного справочника автомобилей
      */
     public function index() {
+        $trucks = Truck::with('parks')->get();
 
+        return view('trucks.trucks_show', [ 'trucks' => $trucks, 'headers' => $this->headers]);
     }
 
     /*
@@ -58,7 +60,7 @@ class TruckController extends Controller
             $free_parks = $parks->pluck('name','id');
         }
 
-        return view('truck_edit.truck_edit', [
+        return view('trucks.truck_edit', [
             'truck' => $truck,
             'headers' => $this->headers,
             'freeParks' => $free_parks

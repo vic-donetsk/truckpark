@@ -116,6 +116,7 @@ function parkFormSubmit(e) {
 // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
 $parkEditForm.focusin(function (e) {
     if (e.target.tagName === 'INPUT') {
+        $(e.target).removeClass('is-invalid').siblings('.is-error').empty();
         $(e.target).parent().removeClass('is-invalid').siblings('.is-error').empty();
     }
 });
@@ -126,6 +127,13 @@ $parkEditForm.click(function (e) {
     if ($(e.target).hasClass('mod_delete')) {
         $(e.target).closest('.trucksBlock').remove();
     }
+});
+
+// обработка удаления парка
+$('.parks_item-value.mod_delete').click(function(e) {
+
+    axios.delete('/park_delete', {params: { id: $(this).parent().data('id') }
+    }).then((response) => window.location.reload());
 });
 
 

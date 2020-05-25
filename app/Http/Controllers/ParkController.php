@@ -29,7 +29,7 @@ class ParkController extends Controller
 
         $allTrucks = Truck::all();
 
-        return view('manager.manager', [
+        return view('parks.parks_show', [
             'parks' => $allParks,
             'headers' => $this->headers
         ]);
@@ -42,7 +42,7 @@ class ParkController extends Controller
     {
         $park = ($id) ? Park::with('trucks')->find($id) : null;
 
-        return view('park_edit.park_edit', [
+        return view('parks.park_edit', [
             'park' => $park,
             'headers' => $this->headers
         ]);

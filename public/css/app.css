@@ -10973,7 +10973,7 @@ body * {
   font-size: 26px;
   font-weight: bold;
   color: antiquewhite;
-  transition: 0.3s ease;
+  transition: transform 0.4s ease, color 0.3s ease;
 }
 
 .mainPage_nav-item.mod_enter {
@@ -10995,7 +10995,8 @@ body * {
   display: flex;
 }
 
-.parks {
+.parks,
+.trucks {
   flex: 1;
   position: relative;
   display: flex;
@@ -11005,28 +11006,35 @@ body * {
   padding-top: 25px;
 }
 
-.parks table {
+.parks table,
+.trucks table {
   margin: 25px auto 30px;
   border-collapse: collapse;
   border: 2px solid #000;
 }
 
 .parks table th,
-.parks table td {
+.parks table td,
+.trucks table th,
+.trucks table td {
   padding: 5px 10px;
   border: 2px solid #000;
 }
 
-.parks table th {
+.parks table th,
+.trucks table th {
   text-align: center;
 }
 
 .parks table .mod_delete,
-.parks table .mod_edit {
+.parks table .mod_edit,
+.trucks table .mod_delete,
+.trucks table .mod_edit {
   text-align: center;
 }
 
-.parks_add {
+.parks_add,
+.trucks_add {
   margin-bottom: 40px;
 }
 
