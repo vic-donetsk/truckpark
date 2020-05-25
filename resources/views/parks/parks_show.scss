@@ -1,16 +1,22 @@
 .parks, .trucks {
 
-    flex:     1;
-    position: relative;
+    flex:            1;
+    position:        relative;
 
-    display: flex;
-    flex-direction: column;
+    display:         flex;
+    flex-direction:  column;
     justify-content: flex-start;
-    align-items: center;
-    padding-top: 25px;
+    align-items:     center;
+    padding:         25px 10px;
+
+    h2 {
+        @media (max-width: 500px) {
+            font-size: 1.2rem;
+        }
+    }
 
     table {
-        margin:          25px auto 30px;
+        margin:          0 auto;
 
         border-collapse: collapse;
         border:          2px solid #000;
@@ -27,10 +33,29 @@
         .mod_delete, .mod_edit {
             text-align: center;
         }
+
+        .mod_address {
+            @media (max-width: 500px) {
+                display: none;
+            }
+        }
+
+        .mod_work_schedule {
+            @media (max-width: 700px) {
+                display: none;
+            }
+        }
     }
 
-    &_add {
-        margin-bottom: 40px;
+    &_buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+        margin: 30px;
+
+        @media (max-width: 700px) {
+            margin: 15px;
+        }
     }
 }
 

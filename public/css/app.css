@@ -10946,6 +10946,13 @@ body * {
   cursor: pointer;
 }
 
+@media (max-width: 500px) {
+  .svg-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 .mainPage {
   flex: 1;
   display: flex;
@@ -10955,6 +10962,12 @@ body * {
   background-image: url("/images/nav_background.jpeg");
   background-size: cover;
   padding: 50px;
+}
+
+@media (max-width: 600px) {
+  .mainPage {
+    padding: 10px;
+  }
 }
 
 .mainPage_nav {
@@ -10974,6 +10987,12 @@ body * {
   font-weight: bold;
   color: antiquewhite;
   transition: transform 0.4s ease, color 0.3s ease;
+}
+
+@media (max-width: 400px) {
+  .mainPage_nav-item {
+    margin: 15px 10px;
+  }
 }
 
 .mainPage_nav-item.mod_enter {
@@ -11003,12 +11022,19 @@ body * {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 25px;
+  padding: 25px 10px;
+}
+
+@media (max-width: 500px) {
+  .parks h2,
+  .trucks h2 {
+    font-size: 1.2rem;
+  }
 }
 
 .parks table,
 .trucks table {
-  margin: 25px auto 30px;
+  margin: 0 auto;
   border-collapse: collapse;
   border: 2px solid #000;
 }
@@ -11033,9 +11059,33 @@ body * {
   text-align: center;
 }
 
-.parks_add,
-.trucks_add {
-  margin-bottom: 40px;
+@media (max-width: 500px) {
+  .parks table .mod_address,
+  .trucks table .mod_address {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .parks table .mod_work_schedule,
+  .trucks table .mod_work_schedule {
+    display: none;
+  }
+}
+
+.parks_buttons,
+.trucks_buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin: 30px;
+}
+
+@media (max-width: 700px) {
+  .parks_buttons,
+  .trucks_buttons {
+    margin: 15px;
+  }
 }
 
 .parkEdit {

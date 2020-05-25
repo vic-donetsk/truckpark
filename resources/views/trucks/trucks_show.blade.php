@@ -3,6 +3,9 @@
 @section('content')
     <div class="trucks">
         <h2>Сведения об автомобилях</h2>
+
+        @include('trucks.trucks_button')
+        
         <table>
             <tr>
                 @foreach ($headers as $header)
@@ -38,12 +41,8 @@
                 </tr>
             @endforeach
         </table>
-        @if (\Illuminate\Support\Facades\Route::currentRouteName() === 'truck_show')
-            <a href="{{route('truck_edit')}}" class="trucks_add" title="Добавить новый автомобиль">
-                <svg class="svg-icon">
-                    <use xlink:href="#svgAdd"/>
-                </svg>
-            </a>
-        @endif
+
+        @include('trucks.trucks_button')
+
     </div>
 @endsection

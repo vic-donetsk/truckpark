@@ -3,10 +3,13 @@
 @section('content')
     <div class="parks">
         <h2>Сведения об автопарках</h2>
+
+        @include('parks.parks_button')
+
         <table>
             <tr>
-                @foreach ($headers as $header)
-                    <th>{{$header}}</th>
+                @foreach ($headers as $header => $value)
+                    <th class="mod_{{$header}}">{{$value}}</th>
                 @endforeach
                 <th>Машины</th>
                 <th></th>
@@ -14,9 +17,9 @@
             </tr>
             @foreach ($parks as $park)
                 <tr class="parks_item" data-id="{{$park->id}}">
-                    <td class="parks_item-value">{{$park->name}}</td>
-                    <td class="parks_item-value">{{$park->address}}</td>
-                    <td class="parks_item-value">{{$park->work_schedule}}</td>
+                    @foreach ($headers as $header => $value)
+                        <td class="parks_item-value mod_{{$header}}">{{ $park->{$header} }}</td>
+                    @endforeach
                     <td class="parks_item-value" valign="top">
                         @foreach($park->trucks as $truck)
                             <p>{{$truck->name}}</p>
@@ -24,7 +27,7 @@
                     </td>
                     <td class="parks_item-value mod_edit">
                         <a href="{{route('park_edit', ['id' => $park->id])}}" title="Редактировать парк">
-                            <svg class="svg-icon" >
+                            <svg class="svg-icon">
                                 <use xlink:href="#svgEdit"/>
                             </svg>
                         </a>
@@ -37,12 +40,8 @@
                 </tr>
             @endforeach
         </table>
-        <a href="{{route('park_edit')}}" class="parks_add" title="Создать новый автопарк">
-            <svg class="svg-icon">
-                <use xlink:href="#svgAdd"/>
-            </svg>
-        </a>
 
+        @include('parks.parks_button')
 
     </div>
 @endsection

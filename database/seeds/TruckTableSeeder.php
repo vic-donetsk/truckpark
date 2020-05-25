@@ -21,10 +21,9 @@ class TruckTableSeeder extends Seeder
           ['name' => 'AX4444AX', 'driver' => 'Алексеев Алексей', 'user_id' => rand(1, 2)],
           ['name' => 'AX5555AX', 'driver' => 'Игорев Игорь', 'user_id' => rand(1, 2)],
           ['name' => 'AX6666AX', 'driver' => 'Матвеев Матвей', 'user_id' => rand(1, 2)],
-          ['name' => 'AX7777AX', 'driver' => 'Чингизов Чингиз', 'user_id' => rand(1, 2)],
-          ['name' => 'AX8888AX', 'driver' => 'Обоев Рулон', 'user_id' => rand(1, 2)],
-          ['name' => 'AX9999AX', 'driver' => 'Помоев Ушат', 'user_id' => rand(1, 2)],
-          ['name' => '123-45AX', 'driver' => 'Релизов Бэкап', 'user_id' => rand(1, 2)],
+          ['name' => 'AX7777AX', 'driver' => 'Русланов Руслан', 'user_id' => rand(1, 2)],
+          ['name' => 'AX8888AX', 'driver' => 'Бакланов Баклан', 'user_id' => rand(1, 2)],
+          ['name' => 'AX9999AX', 'driver' => 'Релизов Релиз', 'user_id' => rand(1, 2)],
         ];
 
         foreach ($trucks as $truck) {
@@ -34,7 +33,6 @@ class TruckTableSeeder extends Seeder
             $randomParks = Park::get()->random($randomParksQuantity);
             $ids = $randomParks->pluck('id')->all();
             $truck->parks()->attach($ids);
-
         }
     }
 }

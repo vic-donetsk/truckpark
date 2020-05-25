@@ -10,6 +10,10 @@
     background-size:  cover;
     padding:          50px;
 
+    @media (max-width: 600px) {
+        padding: 10px;
+    }
+
     &_nav {
         display:         flex;
         justify-content: center;
@@ -30,6 +34,10 @@
         color:         antiquewhite;
 
         transition:    transform 0.4s ease, color 0.3s ease;
+
+        @media (max-width: 400px) {
+            margin: 15px 10px;
+        }
 
         &.mod_enter {
             background: #00c000;
