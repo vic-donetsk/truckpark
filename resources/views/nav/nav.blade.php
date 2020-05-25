@@ -2,7 +2,7 @@
     <nav class="mainPage_nav">
         <a href="{{route($route)}}" class="mainPage_nav-item mod_enter">{{$message}}</a>
         @can('all-parks')
-            <a href="{{route($route)}}" class="mainPage_nav-item mod_enter">Список транспортных средств</a>
+            <a href="{{route('truck_index')}}" class="mainPage_nav-item mod_enter">Список транспортных средств</a>
         @endcan
     </nav>
 

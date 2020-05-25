@@ -33,3 +33,4 @@ require('./bootstrap');
 
 require('../views/manager/manager');
 require('../views/park_edit/park_edit');
+require('../views/truck_edit/truck_edit');

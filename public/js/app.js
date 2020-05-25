@@ -37257,6 +37257,8 @@ __webpack_require__(/*! ../views/manager/manager */ "./resources/views/manager/m
 
 __webpack_require__(/*! ../views/park_edit/park_edit */ "./resources/views/park_edit/park_edit.js");
 
+__webpack_require__(/*! ../views/truck_edit/truck_edit */ "./resources/views/truck_edit/truck_edit.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37472,6 +37474,148 @@ $parkEditForm.focusin(function (e) {
 $parkEditForm.click(function (e) {
   if ($(e.target).hasClass('mod_delete')) {
     $(e.target).closest('.trucksBlock').remove();
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/views/truck_edit/truck_edit.js":
+/*!**************************************************!*\
+  !*** ./resources/views/truck_edit/truck_edit.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var $truckEditForm = $('.truckEdit_form');
+var headers = ['id', 'name', 'address', 'work_schedule']; // добавляем машину на странице автопарка
+
+$('.parksBlock_add').click(function () {
+  var inputLayout = "<div class=\"parksBlock\">\n                          <div class=\"parksBlock_wrapper\">\n                              <div class=\"parksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[name][]\" class=\"modTruckName\">\n                                  <input type=\"hidden\" name=\"trucks[id][]\" class=\"modTruckId\">\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"parksBlock_wrapper\">\n                              <div class=\"parksBlock_item\">\n                                  <input type=\"text\" name=\"trucks[driver][]\" class=\"modTruckDriver\" disabled>\n                              </div>\n                              <div class=\"is-error\"></div>\n                          </div>\n                          <div class=\"parksBlock_delete\">\n                            <svg class=\"svg-delete\">\n                                <use xlink:href=\"#svgDelete\"/>\n                            </svg>\n                          </div>\n                       </div>";
+  $(this).parent().before(inputLayout);
+}); // после ввода номера проверяем наличие машины в БД
+
+$truckEditForm.focusout(function (e) {
+  if ($(e.target).hasClass('modTruckName') && $(e.target).val()) {
+    // временно запрещаем отправку формы
+    $truckEditForm.unbind('submit', truckFormSubmit);
+    axios.get('/truck', {
+      params: {
+        name: $(e.target).val()
+      }
+    }).then(function (response) {
+      var $driverInput = $(e.target).closest('.parksBlock_wrapper').next().find('.modTruckDriver'); // если машина уже в базе
+
+      if (response.data) {
+        // заполняем водителя, заносим ИД-шку и снимаем ошибку, если была
+        $driverInput.val(response.data.driver);
+        $(e.target).next('input').val(response.data.id);
+
+        if ($driverInput.parent().hasClass('is-invalid')) {
+          $driverInput.parent().removeClass('is-invalid').next().empty();
+        }
+      } else {
+        // если машины в базе нет - обнуляем ИД и разрешаем ввод данных водителя
+        $driverInput.prop('disabled', false).val('').focus();
+      } // восстанавливаем обработчик отправки формы
+
+
+      $truckEditForm.bind('submit', truckFormSubmit);
+    });
+  }
+}); // отправка заполненной формы на валидацию
+
+$truckEditForm.submit(function (e) {
+  e.preventDefault();
+});
+$truckEditForm.bind('submit', truckFormSubmit);
+
+function truckFormSubmit(e) {
+  // формируем данные полей автопарка
+  var axiosParams = {};
+
+  var _iterator = _createForOfIteratorHelper(headers),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var oneHeader = _step.value;
+      axiosParams[oneHeader] = $(".parkEdit_form input[name=".concat(oneHeader, "]")).val();
+    } // формируем данные добавленных машин
+
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  var newTruckNames = $("input[name='trucks[name][]']");
+  axiosParams.newTruckNames = newTruckNames.map(function () {
+    return $(this).val();
+  }).get();
+  var newTruckDrivers = $("input[name='trucks[driver][]']");
+  axiosParams.newTruckDrivers = newTruckDrivers.map(function () {
+    return $(this).val();
+  }).get();
+  var newTruckIds = $("input[name='trucks[id][]']");
+  axiosParams.newTruckIds = newTruckIds.map(function () {
+    return $(this).val();
+  }).get(); // формируем данные оставшихся после редактирования ранее привязанных машин
+
+  var oldTruckIds = $('.parksBlock_item.mod_name');
+  axiosParams.oldTruckIds = oldTruckIds.map(function () {
+    return $(this).data('id');
+  }).get();
+  axios.post('/park_update', axiosParams).then(function (response) {
+    if (response.data === 'ok') {
+      window.location.pathname = '/parks';
+    } else {
+      var _iterator2 = _createForOfIteratorHelper(response.data),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var errorData = _step2.value;
+
+          // если не введены данные автопарка
+          if (headers.indexOf(errorData[0]) !== -1) {
+            $(".parkEdit_form input[name=".concat(errorData[0], "]")).addClass('is-invalid').next().text(errorData[1]);
+          } else {
+            // если не введены данные добавляемых машин
+            var errorElem = errorData[0].split('_');
+
+            if (errorElem[0] === 'truck') {
+              $(newTruckNames[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+            } else {
+              $(newTruckDrivers[errorElem[1]]).parent().addClass('is-invalid').siblings('.is-error').text(errorData[1]);
+            }
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+    }
+  });
+} // при фокусе на поле ввода убираем красную рамку и сообщение об ошибке под ним
+
+
+$truckEditForm.focusin(function (e) {
+  if (e.target.tagName === 'INPUT') {
+    $(e.target).parent().removeClass('is-invalid').siblings('.is-error').empty();
+  }
+}); // удаляет ранее привязанную к парку машину или
+// добавленную в процессе редактирования новую машину
+
+$truckEditForm.click(function (e) {
+  if ($(e.target).hasClass('mod_delete')) {
+    $(e.target).closest('.parksBlock').remove();
   }
 });
 
