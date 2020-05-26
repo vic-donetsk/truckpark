@@ -16,8 +16,6 @@ class CreateTrucksTable extends Migration
         Schema::create('trucks', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
 
             $table->id();
 

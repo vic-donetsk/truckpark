@@ -16,8 +16,6 @@ class CreateParkTruckTable extends Migration
         Schema::create('park_truck', function (Blueprint $table) {
 
             $table->engine = 'InnoDB';
-            $table->charset = 'utf8';
-            $table->collation = 'utf8_unicode_ci';
 
             $table->id();
             $table->unsignedBigInteger('park_id');       // ИД автопарка
