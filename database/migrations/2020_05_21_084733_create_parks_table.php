@@ -23,7 +23,7 @@ class CreateParksTable extends Migration
             $table->string('address');
             $table->string('work_schedule')->nullable();
 
-            $table->timestamps();
+//            $table->timestamps();
 
         });
     }

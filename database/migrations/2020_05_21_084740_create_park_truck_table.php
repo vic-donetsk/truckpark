@@ -20,7 +20,7 @@ class CreateParkTruckTable extends Migration
             $table->id();
             $table->unsignedBigInteger('park_id');       // ИД автопарка
             $table->unsignedBigInteger('truck_id');      // ИД машины
-            $table->timestamps();
+//            $table->timestamps();
 
             $table->foreign('park_id')
                 ->references('id')

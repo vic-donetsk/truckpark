@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->unsignedBigInteger('role_id');       // ИД роли
 
-            $table->timestamps();
+//            $table->timestamps();
 
             $table->foreign('role_id')
                 ->references('id')
