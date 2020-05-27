@@ -19,8 +19,8 @@ class CreateParksTable extends Migration
 
             $table->id();
 
-            $table->string('name', 100);
-            $table->string('address', 100);
+            $table->string('name');
+            $table->string('address');
             $table->string('work_schedule')->nullable();
 
             $table->timestamps();

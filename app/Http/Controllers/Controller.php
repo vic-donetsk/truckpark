@@ -14,7 +14,7 @@ class Controller extends BaseController
     /*
      * возвращает преобразованный в латиницу госномер авто
      */
-    protected function translit($str)
+    public function translit_truck_name($str)
     {
         $tr = array(
             "А"=>"A", "а"=>"a",

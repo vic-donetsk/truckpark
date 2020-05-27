@@ -19,8 +19,8 @@ class CreateTrucksTable extends Migration
 
             $table->id();
 
-            $table->string('name', 17)->unique();
-            $table->string('driver', 50);
+            $table->string('name')->unique();
+            $table->string('driver');
 
             $table->unsignedBigInteger('user_id');       // ИД создателя
 

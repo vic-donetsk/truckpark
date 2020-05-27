@@ -39,7 +39,7 @@ class TruckController extends Controller
     {
         if ($request->has('name')) {
             try {
-                $truck = Truck::where('name', $this->translit($request->name))->firstOrFail();
+                $truck = Truck::where('name', $this->translit_truck_name($request->name))->firstOrFail();
                 return response()->json(['id' => $truck->id, 'driver' => $truck->driver]);
             } catch (\Throwable $e) {
                 return null;
@@ -88,7 +88,7 @@ class TruckController extends Controller
             // проверяем на дубликат госномера
             if ($key === 'name' and $request->name) {
                 try {
-                    $dublicat = Truck::where([['name', $this->translit($request->name)], ['id', '<>', $request->id]])->firstOrFail();
+                    $dublicat = Truck::where([['name', $this->translit_truck_name($request->name)], ['id', '<>', $request->id]])->firstOrFail();
                     $errors[] = [$key, 'Автомобиль с таким номером уже есть в базе!'];
                 } catch (\Throwable $e) {
                 }
@@ -104,7 +104,7 @@ class TruckController extends Controller
 
         // вначале сохраняем данные самого автопарка
         foreach ($this->headers as $header => $value) {
-            ($header === 'name') ? $truck->{$header} = $this->translit($request->{$header}) : $truck->{$header} = $request->{$header};
+            ($header === 'name') ? $truck->{$header} = $this->translit_truck_name($request->{$header}) : $truck->{$header} = $request->{$header};
         }
         $truck->user_id = Auth::id();
         $truck->save();
@@ -120,12 +120,12 @@ class TruckController extends Controller
      */
     public function delete(Request $request)
     {
-        try {
+        if ($request->id) {
             $truck = Truck::find($request->id);
-            $truck->parks()->detach();
-            $truck->delete();
-        } catch (\Throwable $e) {
+            if ($truck) {
+                $truck->parks()->detach();
+                $truck->delete();
+            }
         }
-
     }
 }
