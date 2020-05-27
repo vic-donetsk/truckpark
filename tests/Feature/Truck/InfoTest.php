@@ -15,6 +15,7 @@ class InfoTest extends TestCase
     /**
      * Тест функции проверки наличия машины в базе по номеру
      * TruckController->info();
+     * для присутствующих в базе номеров
      *
      * @dataProvider correctProvider
      *
@@ -55,6 +56,7 @@ class InfoTest extends TestCase
     /**
      * Тест функции проверки наличия машины в базе по номеру
      * TruckController->info();
+     * для отсутствующих в базе номеров
      *
      * @dataProvider wrongProvider
      *
@@ -74,9 +76,6 @@ class InfoTest extends TestCase
         // получаем в ответ null
         $this->assertNull($response);
     }
-
-
-
 
     /**
      * Провайдер отсуствующих в базе номеров

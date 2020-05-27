@@ -34,7 +34,5 @@ class TruckTableSeeder extends Seeder
             $ids = $randomParks->pluck('id')->all();
             $truck->parks()->attach($ids);
         }
-
-        $truck = factory(Truck::class)->create();
     }
 }
