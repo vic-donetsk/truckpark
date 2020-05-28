@@ -24,7 +24,7 @@ class CreateTrucksTable extends Migration
 
             $table->unsignedBigInteger('user_id');       // ИД создателя
 
-//            $table->timestamps();
+            $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
